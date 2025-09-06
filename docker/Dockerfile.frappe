@@ -1,13 +1,8 @@
 FROM frappe/bench:latest
 
-# Script ins Image kopieren
-COPY init.sh /workspace/init.sh
+# Script ins Image kopieren und gleich ausführbar machen
+COPY --chmod=755 init.sh /workspace/init.sh
 
-# Rechte setzen
-RUN chmod +x /workspace/init.sh
-
-# Standard-Arbeitsverzeichnis
 WORKDIR /home/frappe
 
-# Script als Entrypoint/Command starten
 CMD ["bash", "/workspace/init.sh"]
